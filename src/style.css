@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+
+@layer components {
+  .input-field {
+    @apply w-full rounded-md border-gray-300 shadow-sm px-4 py-2 bg-white border text-gray-900
+    focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+  }
+  
+  .btn-primary {
+    @apply inline-flex justify-center rounded-md border border-transparent 
+    bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm 
+    hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 
+    focus:ring-offset-2 transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg
+  }
+
+  .table-container {
+    @apply overflow-x-auto rounded-lg shadow-md my-6;
+  }
+
+  .data-table {
+    @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+  }
+
+  .data-table thead {
+  }
+
+  .data-table th {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
+  }
+
+  .data-table tbody {
+    @apply bg-white divide-y divide-gray-200;
+  }
+
+  .data-table td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-500;
+  }
+
+  .form-section {
+    @apply mb-8 p-5 rounded-lg shadow-sm border border-gray-700;
+  }
+
+  .form-section-title {
+    @apply text-lg font-medium mb-4 pb-2 border-b border-gray-700;
+  }
+}
+
+#app {
+  width: 100%;
+  margin: 0 auto;
+}
