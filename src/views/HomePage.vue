@@ -4,7 +4,7 @@ import CalculatorForm from '../components/form/CalculatorForm.vue';
 </script>
 
 <template>
-  <div class="min-h-screen py-8">
+  <div class="py-4">
     <div class="container mx-auto px-4">
       <header class="mb-8 text-center">
         <h1 class="text-3xl font-bold mb-2">Calculadora Financeira</h1>
