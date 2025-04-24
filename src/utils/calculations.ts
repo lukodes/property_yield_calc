@@ -9,7 +9,7 @@ interface FinancingProjectionParams {
 interface InvestmentSimulationParams {
   monthlyPayment: number;
   desiredRent: number;
-  expectedReturn: number;
+  rentabilityPercentage: number;
   financingTime: number;
   vacancyTime: number;
 }
@@ -85,7 +85,7 @@ export function calculateInvestmentSimulation(params: InvestmentSimulationParams
   const {
     monthlyPayment,
     desiredRent,
-    expectedReturn,
+    rentabilityPercentage,
     financingTime,
     vacancyTime
   } = params;
@@ -109,7 +109,7 @@ export function calculateInvestmentSimulation(params: InvestmentSimulationParams
     }
     
     // Apply monthly return on balance
-    const monthlyInterest = balance > 0 ? balance * (expectedReturn / 100) : 0;
+    const monthlyInterest = balance > 0 ? balance * (rentabilityPercentage / 100) : 0;
     
     // Update balance with monthly difference and interest
     balance = balance + monthlyDifference + monthlyInterest;

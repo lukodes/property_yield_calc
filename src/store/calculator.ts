@@ -8,8 +8,9 @@ export const useCalculatorStore = defineStore('calculator', () => {
   const monthlyPayment = ref(2500)
   const financingTime = ref(360) // in months
   const propertyValue = ref(400000)
+  const propertyAnnualAppreciation = ref(5) // in percentage
   const desiredRent = ref(1800)
-  const expectedReturn = ref(0.9) // monthly percentage
+  const rentabilityPercentage = ref(0.9) // monthly percentage
   const vacancyTime = ref(1) // in months
 
   // Results
@@ -19,7 +20,7 @@ export const useCalculatorStore = defineStore('calculator', () => {
       monthlyPayment: monthlyPayment.value,
       financingTime: financingTime.value,
       propertyValue: propertyValue.value,
-      annualAppreciation: 5, // 5% annual property appreciation
+      annualAppreciation: propertyAnnualAppreciation.value,
     })
   })
 
@@ -27,7 +28,7 @@ export const useCalculatorStore = defineStore('calculator', () => {
     return calculateInvestmentSimulation({
       monthlyPayment: monthlyPayment.value,
       desiredRent: desiredRent.value,
-      expectedReturn: expectedReturn.value,
+      rentabilityPercentage: rentabilityPercentage.value,
       financingTime: financingTime.value,
       vacancyTime: vacancyTime.value,
     })
@@ -57,7 +58,8 @@ export const useCalculatorStore = defineStore('calculator', () => {
     financingTime,
     propertyValue,
     desiredRent,
-    expectedReturn,
+    propertyAnnualAppreciation,
+    rentabilityPercentage,
     vacancyTime,
     
     // Computed results

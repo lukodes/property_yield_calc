@@ -10,14 +10,14 @@ const calculatorStore = useCalculatorStore();
     
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
       <div class="space-y-2">
-        <label for="expectedReturn" class="block text-sm font-medium text-gray-700">
+        <label for="rentabilityPercentage" class="block text-sm font-medium text-gray-700">
           Rentabilidade esperada mensal (%)
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <input
             type="number"
-            id="expectedReturn"
-            v-model="calculatorStore.expectedReturn"
+            id="rentabilityPercentage"
+            v-model="calculatorStore.rentabilityPercentage"
             class="input-field pr-12"
             placeholder="0,90"
             min="0"
@@ -40,7 +40,7 @@ const calculatorStore = useCalculatorStore();
           class="input-field"
           placeholder="1"
           min="0"
-          max="12"
+          max="100"
         />
       </div>
     </div>

@@ -43,6 +43,9 @@ const navigateToForm = () => {
           <span class="font-medium">Valor do imóvel inicial:</span> {{ calculatorStore.formatCurrency(calculatorStore.propertyValue) }}
         </p>
         <p class="text-sm">
+          <span class="font-medium">Valorização anual do imóvel:</span> {{ calculatorStore.propertyAnnualAppreciation }}%
+        </p>
+        <p class="text-sm">
           <span class="font-medium">Tempo de financiamento:</span> 
           {{ Math.floor(calculatorStore.financingTime / 12) }} anos e {{ calculatorStore.financingTime % 12 }} meses
         </p>
@@ -63,7 +66,7 @@ const navigateToForm = () => {
         </p>
         <p class="text-sm">
           <span class="font-medium">Rentabilidade mensal:</span> 
-          {{ calculatorStore.expectedReturn }}%
+          {{ calculatorStore.rentabilityPercentage }}%
         </p>
         <p :class="{'text-green-600 font-medium': investmentResult.finalBalance > 0, 
                     'text-red-600 font-medium': investmentResult.finalBalance < 0, 

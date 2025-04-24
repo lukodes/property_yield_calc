@@ -48,6 +48,27 @@ const calculatorStore = useCalculatorStore();
           />
         </div>
       </div>
+
+      <div class="space-y-2">
+        <label for="propertyAnnualAppreciation" class="block text-sm font-medium text-gray-700">
+          Taxa de valorização anual do imóvel (%)
+        </label>
+        <div class="relative mt-1 rounded-md shadow-sm">
+          <input
+            type="number"
+            id="propertyAnnualAppreciation"
+            v-model="calculatorStore.propertyAnnualAppreciation"
+            class="input-field pr-12"
+            placeholder="5"
+            min="0"
+            step="0.1"
+          />
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <span class="text-gray-500 sm:text-sm">%</span>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </template>
