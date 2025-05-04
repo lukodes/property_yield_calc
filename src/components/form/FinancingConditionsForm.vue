@@ -24,7 +24,7 @@ const calculatorStore = useCalculatorStore();
             class="input-field pl-10"
             placeholder="0,00"
             min="0"
-            step="1000"
+            step="10"
             title="Valor inicial pago no ato da compra do imóvel."
           />
         </div>
