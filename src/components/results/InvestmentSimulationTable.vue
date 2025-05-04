@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCalculatorStore } from '../../store/calculator';
 import { ref, computed } from 'vue';
+import { InformationCircleIcon } from '@heroicons/vue/24/outline';
 
 const calculatorStore = useCalculatorStore();
 const showAllRows = ref(false);
@@ -64,8 +65,15 @@ const filteredSimulation = computed(() => {
         <p><span class="font-medium">Diferença mensal entre parcela e aluguel:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.monthlyPayment - calculatorStore.desiredRent) }}
         </p>
-        <p><span class="font-medium">Total investido:</span> 
+        <p class="flex items-center">
+          <span class="font-medium">
+            Valor total investido s/ rendimentos:
+          </span>
           {{ calculatorStore.formatCurrency(calculatorStore.investmentSimulation[calculatorStore.investmentSimulation.length - 1].investedAmount) }}
+
+          <span  title="Esse valor só leva em consideração o total investido bruto, sem os rendimentos sob juros composto.">
+            <InformationCircleIcon class="h-4 text-gray-500 ml-1" />
+          </span>
         </p>
         <p :class="{'text-green-600 font-medium': calculatorStore.investmentSimulation[calculatorStore.investmentSimulation.length - 1].balance > 0, 
                     'text-red-600 font-medium': calculatorStore.investmentSimulation[calculatorStore.investmentSimulation.length - 1].balance < 0, 

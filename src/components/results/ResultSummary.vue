@@ -93,6 +93,15 @@ const navigateToForm = () => {
           </span>
           {{ calculatorStore.formatCurrency(investmentResult.monthlyDifference) }}
         </p>
+        <p class="text-sm flex items-center gap-1">
+          <span class="font-medium">Valor total aportado s/ rendimentos</span>
+          <span title="Valor total investido ao longo do tempo de financiamento. Calculado: diferença mensal multiplicada pelo tempo de financiamento, sem considerar a rentabilidade.">
+            <InformationCircleIcon class="h-4 w-4 text-gray-500" />
+          </span>
+          {{ calculatorStore.formatCurrency(
+            investmentResult.monthlyDifference * calculatorStore.financingTime
+          ) }}
+        </p>
         <p class="text-sm">
           <span class="font-medium">Tempo de vacância considerado:</span> 
           {{ calculatorStore.vacancyTime }} meses
