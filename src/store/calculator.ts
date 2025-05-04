@@ -4,6 +4,7 @@ import { calculateFinancingProjection, calculateInvestmentSimulation } from '../
 
 export const useCalculatorStore = defineStore('calculator', () => {
   // Form data
+  const entryAmount = ref(0)
   const financingAmount = ref(300000)
   const monthlyPayment = ref(2500)
   const financingTime = ref(360) // in months
@@ -12,11 +13,24 @@ export const useCalculatorStore = defineStore('calculator', () => {
   const desiredRent = ref(1800)
   const rentabilityPercentage = ref(0.9) // monthly percentage
   const vacancyTime = ref(1) // in months
+  const annualInterestRatePercentage = ref(10) // in percentage
 
   // Results
+  const totalFinancingDebt = computed(() => {
+    const monthlyInterestRate = Math.pow(1 + annualInterestRatePercentage.value / 100, 1 / 12) - 1
+    const totalFinancingDebt = financingAmount.value * Math.pow(1 + monthlyInterestRate, financingTime.value)
+
+    return totalFinancingDebt
+  })
+
+  const totalPropertyCost = computed(() => {
+    const totalCost = totalFinancingDebt.value + entryAmount.value
+    return totalCost
+  })
+
   const financingProjection = computed(() => {
     return calculateFinancingProjection({
-      financingAmount: financingAmount.value,
+      totalFinancingDebt: totalFinancingDebt.value,
       monthlyPayment: monthlyPayment.value,
       financingTime: financingTime.value,
       propertyValue: propertyValue.value,
@@ -26,6 +40,7 @@ export const useCalculatorStore = defineStore('calculator', () => {
 
   const investmentSimulation = computed(() => {
     return calculateInvestmentSimulation({
+      entryAmount: entryAmount.value,
       monthlyPayment: monthlyPayment.value,
       desiredRent: desiredRent.value,
       rentabilityPercentage: rentabilityPercentage.value,
@@ -53,6 +68,7 @@ export const useCalculatorStore = defineStore('calculator', () => {
 
   return {
     // Form data
+    entryAmount,
     financingAmount,
     monthlyPayment,
     financingTime,
@@ -61,8 +77,11 @@ export const useCalculatorStore = defineStore('calculator', () => {
     propertyAnnualAppreciation,
     rentabilityPercentage,
     vacancyTime,
+    annualInterestRatePercentage,
     
     // Computed results
+    totalFinancingDebt,
+    totalPropertyCost,
     financingProjection,
     investmentSimulation,
     

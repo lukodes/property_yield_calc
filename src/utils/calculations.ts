@@ -1,5 +1,5 @@
 interface FinancingProjectionParams {
-  financingAmount: number;
+  totalFinancingDebt: number;
   monthlyPayment: number;
   financingTime: number;
   propertyValue: number;
@@ -7,6 +7,7 @@ interface FinancingProjectionParams {
 }
 
 interface InvestmentSimulationParams {
+  entryAmount: number;
   monthlyPayment: number;
   desiredRent: number;
   rentabilityPercentage: number;
@@ -32,17 +33,17 @@ interface MonthlyInvestment {
 // Calculate property financing projection
 export function calculateFinancingProjection(params: FinancingProjectionParams): MonthlyProjection[] {
   const {
-    financingAmount,
+    totalFinancingDebt,
     monthlyPayment,
     financingTime,
     propertyValue,
-    annualAppreciation
+    annualAppreciation,
   } = params;
 
   const monthlyAppreciation = Math.pow(1 + annualAppreciation / 100, 1 / 12) - 1;
   const result: MonthlyProjection[] = [];
   
-  let currentRemainingDebt = financingAmount;
+  let currentRemainingDebt = totalFinancingDebt;
   let currentPaidAmount = 0;
   let currentPropertyValue = propertyValue;
   
@@ -55,7 +56,7 @@ export function calculateFinancingProjection(params: FinancingProjectionParams):
     currentPaidAmount += monthlyPayment;
     
     // Simple linear debt reduction (this is a simplification)
-    currentRemainingDebt = financingAmount - (financingAmount / financingTime * month);
+    currentRemainingDebt = totalFinancingDebt - (totalFinancingDebt / financingTime * month);
     if (currentRemainingDebt < 0) currentRemainingDebt = 0;
     
     // Calculate equity (property value minus remaining debt)
@@ -83,6 +84,7 @@ export function calculateFinancingProjection(params: FinancingProjectionParams):
 // Calculate investment simulation with the difference between mortgage payment and rent
 export function calculateInvestmentSimulation(params: InvestmentSimulationParams): MonthlyInvestment[] {
   const {
+    entryAmount,
     monthlyPayment,
     desiredRent,
     rentabilityPercentage,
@@ -98,8 +100,8 @@ export function calculateInvestmentSimulation(params: InvestmentSimulationParams
   // Calculate initial vacancy cost (added to first month)
   const vacancyCost = desiredRent * vacancyTime;
   
-  let investedAmount = 0;
-  let balance = -vacancyCost; // Start with negative balance due to vacancy
+  let investedAmount = entryAmount + vacancyCost;
+  let balance = investedAmount;
   
   // Calculate for each month
   for (let month = 1; month <= financingTime; month++) {
@@ -109,7 +111,7 @@ export function calculateInvestmentSimulation(params: InvestmentSimulationParams
     }
     
     // Apply monthly return on balance
-    const monthlyInterest = balance > 0 ? balance * (rentabilityPercentage / 100) : 0;
+    const monthlyInterest = balance * (rentabilityPercentage / 100);
     
     // Update balance with monthly difference and interest
     balance = balance + monthlyDifference + monthlyInterest;
