@@ -22,6 +22,7 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,90"
             min="0"
             step="0.1"
+            title="Percentual de rentabilidade mensal esperada para o investimento."
           />
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm">%</span>
@@ -41,6 +42,7 @@ const calculatorStore = useCalculatorStore();
           placeholder="1"
           min="0"
           max="100"
+          title="Número estimado de meses em que o imóvel ficará desocupado."
         />
       </div>
     </div>

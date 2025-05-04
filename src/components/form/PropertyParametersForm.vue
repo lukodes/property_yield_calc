@@ -25,6 +25,7 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="1000"
+            title="Valor total estimado do imóvel em reais."
           />
         </div>
       </div>
@@ -45,6 +46,7 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="100"
+            title="Valor mensal do aluguel pretendido para o imóvel."
           />
         </div>
       </div>
@@ -62,6 +64,7 @@ const calculatorStore = useCalculatorStore();
             placeholder="5"
             min="0"
             step="0.1"
+            title="Percentual de valorização anual estimado para o imóvel."
           />
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm">%</span>
