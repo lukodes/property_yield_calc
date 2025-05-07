@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useCalculatorStore } from '../../store/calculator';
+import { useI18n } from 'vue-i18n';
 
 const calculatorStore = useCalculatorStore();
+const { t } = useI18n();
 </script>
 
 <template>
   <div class="form-section">
-    <h3 class="form-section-title">Parâmetros do Imóvel</h3>
+    <h3 class="form-section-title">{{ t('propertyParameters.title') }}</h3>
     
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
       <div class="space-y-2">
         <label for="propertyValue" class="block text-sm font-medium text-gray-700">
-          Valor total do imóvel
+          {{ t('propertyParameters.propertyValue') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -25,14 +27,14 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="1000"
-            title="Valor total estimado do imóvel em reais."
+            :title="t('propertyParameters.propertyValue')"
           />
         </div>
       </div>
       
       <div class="space-y-2">
         <label for="desiredRent" class="block text-sm font-medium text-gray-700">
-          Valor do aluguel pretendido
+          {{ t('propertyParameters.desiredRent') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -46,14 +48,14 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="100"
-            title="Valor mensal do aluguel pretendido para o imóvel."
+            :title="t('propertyParameters.desiredRent')"
           />
         </div>
       </div>
 
       <div class="space-y-2">
         <label for="propertyAnnualAppreciation" class="block text-sm font-medium text-gray-700">
-          Taxa de valorização anual do imóvel (%)
+          {{ t('propertyParameters.annualAppreciation') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <input
@@ -64,7 +66,7 @@ const calculatorStore = useCalculatorStore();
             placeholder="5"
             min="0"
             step="0.1"
-            title="Percentual de valorização anual estimado para o imóvel."
+            :title="t('propertyParameters.annualAppreciation')"
           />
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm">%</span>

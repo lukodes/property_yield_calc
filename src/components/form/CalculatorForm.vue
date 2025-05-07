@@ -23,7 +23,7 @@ const generateSimulation = () => {
           type="submit" 
           class="btn-primary px-8 py-3 text-base"
         >
-          Gerar Simulação
+          {{ $t('calculatorForm.startSimulation') }}
         </button>
       </div>
     </form>

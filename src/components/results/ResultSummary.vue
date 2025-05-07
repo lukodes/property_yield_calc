@@ -2,10 +2,12 @@
 import { useCalculatorStore } from '../../store/calculator';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { InformationCircleIcon } from '@heroicons/vue/24/outline';
 
 const calculatorStore = useCalculatorStore();
 const router = useRouter();
+const { t } = useI18n();
 
 const financingResult = computed(() => {
   const lastItem = calculatorStore.financingProjection[calculatorStore.financingProjection.length - 1];
@@ -32,38 +34,39 @@ const navigateToForm = () => {
 
 <template>
   <div class="card mb-6">
-    <h2 class="text-2xl font-bold text-gray-900 mb-4">Resumo da Simulação</h2>
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ t('results.resultSummary.title') }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="space-y-3">
-        <h3 class="text-lg font-medium text-primary-800">Cenário com Financiamento</h3>
+        <h3 class="text-lg font-medium text-primary-800">{{ t('results.resultSummary.financingScenario') }}</h3>
         <p class="text-sm">
-          <span class="font-medium">Valor financiado:</span> 
+          <span class="font-medium">{{ t('results.resultSummary.financedAmount') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.financingAmount) }}
         </p>
         <p class="text-sm">
-          <span class="font-medium">Valor total pago no financiamento:</span> 
+          <span class="font-medium">{{ t('results.resultSummary.totalPaid') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.totalFinancingDebt) }}
         </p>
         <p class="text-sm">
-          <span class="font-medium">Valor do imóvel inicial:</span> 
+          <span class="font-medium">{{ t('results.resultSummary.initialPropertyValue') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.propertyValue) }}
         </p>
         <p class="text-sm">
-          <span class="font-medium">Valor total gasto no imóvel:</span> 
+          <span class="font-medium">{{ t('results.resultSummary.totalPropertyCost') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.totalPropertyCost) }}
         </p>
         <p class="text-sm">
-          <span class="font-medium">Valorização anual do imóvel:</span> 
+          <span class="font-medium">{{ t('results.resultSummary.annualAppreciation') }}:</span> 
           {{ calculatorStore.propertyAnnualAppreciation }}%
         </p>
         <p class="text-sm">
-          <span class="font-medium">Tempo de financiamento:</span> 
-          {{ Math.floor(calculatorStore.financingTime / 12) }} anos e {{ calculatorStore.financingTime % 12 }} meses
+          <span class="font-medium">{{ t('results.resultSummary.financingTime') }}:</span> 
+          {{ Math.floor(calculatorStore.financingTime / 12) }} {{ t('results.resultSummary.years') }} 
+          {{ calculatorStore.financingTime % 12 }} {{ t('results.resultSummary.months') }}
         </p>
         <p class="text-lg font-medium text-primary-700 flex items-center gap-1">
-          <span>Patrimônio final</span>
-          <span title="Valor do imóvel ao fim do financiamento considerando a taxa de valorização.">
+          <span>{{ t('results.resultSummary.finalEquity') }}</span>
+          <span :title="t('results.resultSummary.finalEquityTooltip')">
             <InformationCircleIcon class="h-5 w-5 text-gray-500" />
           </span>
           {{ calculatorStore.formatCurrency(financingResult.totalEquity) }}
@@ -71,31 +74,31 @@ const navigateToForm = () => {
       </div>
 
       <div class="space-y-3">
-        <h3 class="text-lg font-medium text-accent-700">Cenário com Aluguel e Investimento</h3>
+        <h3 class="text-lg font-medium text-accent-700">{{ t('results.resultSummary.investmentScenario') }}</h3>
         <p class="text-sm flex items-center gap-1">
-          <span class="font-medium">Valor de entrada do imóvel</span>
-          <span title="Valor inicial pago na entrada do imóvel. É considerado como investimento no cenário sem financiamento.">
+          <span class="font-medium">{{ t('results.resultSummary.entryAmount') }}</span>
+          <span :title="t('results.resultSummary.entryAmountTooltip')">
             <InformationCircleIcon class="h-4 w-4 text-gray-500" />
           </span>
           {{ calculatorStore.formatCurrency(calculatorStore.entryAmount) }}
         </p>
         <p class="text-sm flex items-center gap-1">
-          <span class="font-medium">Valor gasto no período de vacância</span>
-          <span title="Valor total gasto durante o tempo estimado sem inquilino. Calculado: aluguel multiplicado pelos meses de vacância. No cenário de investimento é contabilizado somado ao valor de entrada como montande inicial a render juros.">
+          <span class="font-medium">{{ t('results.resultSummary.vacancyCost') }}</span>
+          <span :title="t('results.resultSummary.vacancyCostTooltip')">
             <InformationCircleIcon class="h-4 w-4 text-gray-500" />
           </span>
           {{ calculatorStore.formatCurrency(calculatorStore.vacancyTime * calculatorStore.monthlyPayment) }}
         </p>
         <p class="text-sm flex items-center gap-1">
-          <span class="font-medium">Diferença mensal investida</span>
-          <span title="Diferença entre o valor da parcela do financiamento e o aluguel desejado. Esse valor é investido mensalmente.">
+          <span class="font-medium">{{ t('results.resultSummary.monthlyDifference') }}</span>
+          <span :title="t('results.resultSummary.monthlyDifferenceTooltip')">
             <InformationCircleIcon class="h-4 w-4 text-gray-500" />
           </span>
           {{ calculatorStore.formatCurrency(investmentResult.monthlyDifference) }}
         </p>
         <p class="text-sm flex items-center gap-1">
-          <span class="font-medium">Valor total aportado s/ rendimentos</span>
-          <span title="Valor total investido ao longo do tempo de financiamento. Calculado: diferença mensal multiplicada pelo tempo de financiamento, sem considerar a rentabilidade e o tempo de vacância.">
+          <span class="font-medium">{{ t('results.resultSummary.totalInvestedWithoutReturns') }}</span>
+          <span :title="t('results.resultSummary.totalInvestedWithoutReturnsTooltip')">
             <InformationCircleIcon class="h-4 w-4 text-gray-500" />
           </span>
           {{ calculatorStore.formatCurrency(
@@ -103,19 +106,19 @@ const navigateToForm = () => {
           ) }}
         </p>
         <p class="text-sm">
-          <span class="font-medium">Tempo de vacância considerado:</span> 
-          {{ calculatorStore.vacancyTime }} meses
+          <span class="font-medium">{{ t('results.resultSummary.vacancyTime') }}:</span> 
+          {{ calculatorStore.vacancyTime }} {{ t('results.resultSummary.months') }}
         </p>
         <p class="text-sm">
-          <span class="font-medium">Rentabilidade mensal:</span> 
+          <span class="font-medium">{{ t('results.resultSummary.monthlyReturn') }}:</span> 
           {{ calculatorStore.rentabilityPercentage }}%
         </p>
         <p :class="{'text-green-600 font-medium': investmentResult.finalBalance > 0, 
                     'text-red-600 font-medium': investmentResult.finalBalance < 0, 
                     'text-lg': true}"
            class="flex items-center gap-1">
-          <span>Saldo final</span>
-          <span title="Valor total acumulado com os investimentos mensais e rendimento composto. Representa o patrimônio final ao investir todo mês o valor que seria pago na diferença do aluguel mais o montante inicial sob a taxa de juros.">
+          <span>{{ t('results.resultSummary.finalBalance') }}</span>
+          <span :title="t('results.resultSummary.finalBalanceTooltip')">
             <InformationCircleIcon class="h-5 w-5 text-gray-500" />
           </span>
           {{ calculatorStore.formatCurrency(investmentResult.finalBalance) }}
@@ -126,18 +129,20 @@ const navigateToForm = () => {
     <div class="border-t border-gray-200 mt-6 pt-4">
       <div class="flex justify-between items-center">
         <p class="text-sm font-medium">
-          Diferença entre cenários:
+          {{ t('results.resultSummary.scenarioDifference') }}:
           <span :class="{'text-green-600': financingResult.totalEquity > investmentResult.finalBalance, 
                           'text-red-600': financingResult.totalEquity < investmentResult.finalBalance}">
             {{ calculatorStore.formatCurrency(financingResult.totalEquity - investmentResult.finalBalance) }}
-            {{ financingResult.totalEquity > investmentResult.finalBalance ? 'a favor do financiamento' : 'a favor do investimento' }}
+            {{ financingResult.totalEquity > investmentResult.finalBalance 
+              ? t('results.resultSummary.favorFinancing') 
+              : t('results.resultSummary.favorInvestment') }}
           </span>
         </p>
         <button
           @click="navigateToForm"
           class="text-sm text-primary-600 hover:text-primary-800"
         >
-          Alterar parâmetros
+          {{ t('results.resultSummary.changeParameters') }}
         </button>
       </div>
     </div>

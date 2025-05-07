@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useCalculatorStore } from '../../store/calculator';
+import { useI18n } from 'vue-i18n';
 
 const calculatorStore = useCalculatorStore();
+const { t } = useI18n();
 </script>
 
 <template>
   <div class="form-section">
-    <h3 class="form-section-title">Condições do Financiamento</h3>
+    <h3 class="form-section-title">{{ t('financingConditions.title') }}</h3>
     
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
       <div class="space-y-2">
         <label for="entryAmount" class="block text-sm font-medium text-gray-700">
-          Valor de entrada / Ato
+          {{ t('financingConditions.entryAmount') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -25,14 +27,14 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="10"
-            title="Valor inicial pago no ato da compra do imóvel."
+            :title="t('financingConditions.entryAmount')"
           />
         </div>
       </div>
 
       <div class="space-y-2">
         <label for="financingAmount" class="block text-sm font-medium text-gray-700">
-          Valor a ser financiado
+          {{ t('financingConditions.financingAmount') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -46,14 +48,14 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="100"
-            title="Montante total que será financiado pelo banco ou instituição financeira."
+            :title="t('financingConditions.financingAmount')"
           />
         </div>
       </div>
       
       <div class="space-y-2">
         <label for="monthlyPayment" class="block text-sm font-medium text-gray-700">
-          Valor da parcela mensal
+          {{ t('financingConditions.monthlyPayment') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -67,14 +69,14 @@ const calculatorStore = useCalculatorStore();
             placeholder="0,00"
             min="0"
             step="100"
-            title="Valor que será pago mensalmente para quitar o financiamento."
+            :title="t('financingConditions.monthlyPayment')"
           />
         </div>
       </div>
 
       <div class="space-y-2">
         <label for="financingTime" class="block text-sm font-medium text-gray-700">
-          Tempo de financiamento (meses)
+          {{ t('financingConditions.financingTime') }}
         </label>
         <input
           type="number"
@@ -84,16 +86,19 @@ const calculatorStore = useCalculatorStore();
           placeholder="360"
           min="12"
           max="480"
-          title="Duração total do financiamento em meses."
+          :title="t('financingConditions.financingTime')"
         />
         <p class="text-sm text-gray-500">
-          {{ Math.floor(calculatorStore.financingTime / 12) }} anos e {{ calculatorStore.financingTime % 12 }} meses
+          {{ t('financingConditions.yearsAndMonths', {
+            years: Math.floor(calculatorStore.financingTime / 12),
+            months: calculatorStore.financingTime % 12,
+          }) }}
         </p>
       </div>
 
       <div class="space-y-2">
         <label for="annualInterestRatePercentage" class="block text-sm font-medium text-gray-700">
-          Taxa de juros do financiamento a.a. (%)
+          {{ t('financingConditions.annualInterestRate') }}
         </label>
         <div class="relative mt-1 rounded-md shadow-sm">
           <input
@@ -104,14 +109,13 @@ const calculatorStore = useCalculatorStore();
             placeholder="10"
             min="0"
             step="0.1"
-            title="Taxa de juros anual aplicada ao financiamento."
+            :title="t('financingConditions.annualInterestRate')"
           />
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <span class="text-gray-500 sm:text-sm">%</span>
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 </template>

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { useCalculatorStore } from '../../store/calculator';
 import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const calculatorStore = useCalculatorStore();
+const { t } = useI18n();
+
 const showAllRows = ref(false);
 
 const toggleRows = () => {
@@ -26,12 +29,14 @@ const filteredProjection = computed(() => {
 <template>
   <div class="card table-container">
     <div class="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
-      <h3 class="text-lg font-medium text-gray-900">Projeção de Patrimônio com Financiamento</h3>
+      <h3 class="text-lg font-medium text-gray-900">
+        {{ t('results.financingProjection.title') }}
+      </h3>
       <button 
         @click="toggleRows" 
         class="text-sm text-primary-600 hover:text-primary-800"
       >
-        {{ showAllRows ? 'Mostrar menos' : 'Mostrar mais' }}
+        {{ showAllRows ? t('results.buttons.showLess') : t('results.buttons.showMore') }}
       </button>
     </div>
     
@@ -39,11 +44,11 @@ const filteredProjection = computed(() => {
       <table class="data-table">
         <thead>
           <tr>
-            <th>Mês</th>
-            <th>Valor Pago</th>
-            <th>Saldo Devedor</th>
-            <th>Valor do Imóvel</th>
-            <th>Patrimônio Total</th>
+            <th>{{ t('results.financingProjection.month') }}</th>
+            <th>{{ t('results.financingProjection.paidAmount') }}</th>
+            <th>{{ t('results.financingProjection.remainingDebt') }}</th>
+            <th>{{ t('results.financingProjection.propertyValue') }}</th>
+            <th>{{ t('results.financingProjection.totalEquity') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -63,14 +68,16 @@ const filteredProjection = computed(() => {
     
     <div class="p-4 bg-gray-50 border-t border-gray-200">
       <div class="text-sm text-gray-700">
-        <p><span class="font-medium">Total investido:</span> 
+        <p>
+          <span class="font-medium">{{ t('results.financingProjection.totalInvested') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.financingProjection[calculatorStore.financingProjection.length - 1].paidAmount) }}
         </p>
-        <p><span class="font-medium">Valor final do imóvel:</span> 
+        <p>
+          <span class="font-medium">{{ t('results.financingProjection.finalPropertyValue') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.financingProjection[calculatorStore.financingProjection.length - 1].propertyValue) }}
         </p>
         <p class="text-base font-medium text-primary-700 mt-2">
-          <span class="font-medium">Patrimônio total ao final:</span> 
+          <span class="font-medium">{{ t('results.financingProjection.finalTotalEquity') }}:</span> 
           {{ calculatorStore.formatCurrency(calculatorStore.financingProjection[calculatorStore.financingProjection.length - 1].totalEquity) }}
         </p>
       </div>

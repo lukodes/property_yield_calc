@@ -1,0 +1,92 @@
+export default {
+  homePage: {
+    title: 'Simulador de Financiamento Imobiliário',
+    description: 'Simule o financiamento do seu imóvel e compare com o aluguel e investimento.',
+  },
+  calculatorForm: {
+    startSimulation: 'Iniciar Simulação',
+  },
+  financingConditions: {
+    title: 'Condições do Financiamento',
+    entryAmount: 'Valor de entrada / Ato',
+    financingAmount: 'Valor a ser financiado',
+    monthlyPayment: 'Valor da parcela mensal',
+    financingTime: 'Tempo de financiamento (meses)',
+    annualInterestRate: 'Taxa de juros do financiamento a.a. (%)',
+    yearsAndMonths: '{years} anos e {months} meses',
+  },
+  propertyParameters: {
+    title: 'Parâmetros do Imóvel',
+    propertyValue: 'Valor total do imóvel',
+    desiredRent: 'Valor do aluguel pretendido',
+    annualAppreciation: 'Taxa de valorização anual do imóvel (%)',
+  },
+  investmentSimulation: {
+    title: 'Investimento Simulado',
+    rentabilityPercentage: 'Rentabilidade esperada mensal (%)',
+    vacancyTime: 'Tempo de vacância estimado (meses)',
+  },
+  results: {
+    financingProjection: {
+      title: "Projeção de Financiamento",
+      month: "Mês",
+      paidAmount: "Valor Pago",
+      remainingDebt: "Saldo Devedor",
+      propertyValue: "Valor do Imóvel",
+      totalEquity: "Patrimônio Total",
+      totalInvested: "Total Investido",
+      finalPropertyValue: "Valor Final do Imóvel",
+      finalTotalEquity: "Patrimônio Total Final"
+    },
+    resultSummary: {
+      title: "Resumo da Simulação",
+      financingScenario: "Cenário de Financiamento",
+      investmentScenario: "Cenário de Investimento",
+      financedAmount: "Valor Financiado",
+      totalPaid: "Total Pago",
+      initialPropertyValue: "Valor Inicial do Imóvel",
+      totalPropertyCost: "Custo Total do Imóvel",
+      annualAppreciation: "Valorização Anual",
+      financingTime: "Tempo de Financiamento",
+      years: "anos",
+      months: "meses",
+      finalEquity: "Patrimônio Final",
+      finalEquityTooltip: "Valor do imóvel ao final do financiamento considerando a taxa de valorização.",
+      entryAmount: "Valor de Entrada",
+      entryAmountTooltip: "Valor inicial pago pelo imóvel. Considerado como um investimento no cenário não-financeiro.",
+      vacancyCost: "Custo de Vacância",
+      vacancyCostTooltip: "Custo total durante o período estimado de vacância.",
+      monthlyDifference: "Diferença Mensal Investida",
+      monthlyDifferenceTooltip: "Diferença entre a parcela do financiamento e o aluguel pretendido.",
+      totalInvestedWithoutReturns: "Total Investido Sem Retornos",
+      totalInvestedWithoutReturnsTooltip: "Valor total investido sem considerar os retornos do investimento.",
+      vacancyTime: "Tempo de Vacância",
+      monthlyReturn: "Retorno Mensal",
+      finalBalance: "Saldo Final",
+      finalBalanceTooltip: "Valor total ao final do período de financiamento considerando a rentabilidade mensal.",
+      scenarioDifference: "Diferença entre Cenários",
+      favorFinancing: "Cenário de Financiamento é mais vantajoso",
+      favorInvestment: "Cenário de Investimento é mais vantajoso",
+      changeParameters: "Alterar Parâmetros",
+    },
+    investmentSimulationTable: {
+      title: "Simulação de Investimento (Diferença entre Parcela e Aluguel)",
+      month: "Mês",
+      monthlyDifference: "Diferença Mensal",
+      investedAmount: "Valor Investido",
+      accumulatedBalance: "Saldo Acumulado",
+      monthlyDifferenceLabel: "Diferença mensal entre parcela e aluguel:",
+      totalInvestedWithoutReturns: "Total investido sem retornos:",
+      totalInvestedWithoutReturnsTooltip: "Esse valor só considera o total bruto investido, sem os retornos de juros compostos.",
+      finalBalance: "Saldo Final:"
+    },
+    buttons: {
+      showMore: "Mostrar Mais",
+      showLess: "Mostrar Menos"
+    }
+  },
+  footer: {
+    buyMeCoffee: 'Compre-me um café',
+    allRightsReserved: 'Todos os direitos reservados.',
+  },
+};

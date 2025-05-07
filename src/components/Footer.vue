@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
   <footer class="bg-gray-800 text-white py-4">
     <div class="mx-auto px-4 text-center flex justify-between">
       <p class="text-sm mt-2">
-        <a href="https://www.buymeacoffee.com/lukodes" target="_blank" class="text-accent-400 hover:underline">Buy me a coffee</a>
+        <a href="https://www.buymeacoffee.com/lukodes" target="_blank" class="text-accent-400 hover:underline">
+          {{ t('footer.buyMeCoffee') }}
+        </a>
       </p>
       <div class="text-sm">
         <div class="flex items-center justify-center">
@@ -17,7 +22,7 @@
           <a href="https://github.com/lukodes" target="_blank" class="text-primary-400 hover:underline ml-2">Lucas Almeida (lukodes)</a>.
         </div>
         <div class="text-xs text-center">
-          © {{ new Date().getFullYear() }} All rights reserved.
+          © {{ new Date().getFullYear() }} {{ t('footer.allRightsReserved') }}
         </div>
       </div>
     </div>
